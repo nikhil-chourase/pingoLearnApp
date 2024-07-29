@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:pingolearnapp/components/auth_button.dart';
+import 'package:pingolearnapp/components/gesture_button.dart';
 import 'package:pingolearnapp/controllers/auth/auth_service.dart';
 import 'package:pingolearnapp/global.dart';
 import 'package:pingolearnapp/view/auth/sign_up_screen.dart';
@@ -79,48 +81,20 @@ class LoginScreen extends StatelessWidget {
                     style: const TextStyle(color: Colors.black),
                   ),
                   SizedBox(height: size.height/4),
-                  ElevatedButton(
-                    onPressed: () async{
-                      // Implement login logic here
-
+                  AuthButton(onPressed: () async{
                       if (_formKey.currentState!.validate()) {
                         authService.login(
                           _emailController.text,
                           _passwordController.text,
                           context,
                         );
-                       
                       }
-                    },
-                    child:  Text('Login'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      foregroundColor: Colors.white,
-                      fixedSize: Size(size.width/2, size.height/15),
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
-                      shape: RoundedRectangleBorder( // Rectangle shape
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    ),
-                  ),
-            
+                    }, text: 'Login', size: size),
+                 
                   SizedBox(height: size.height/100),
-                  GestureDetector(
-                    onTap: () =>  Navigator.of(context).pushReplacement(MaterialPageRoute(builder : (context) => SignUpScreen())),
-                    child: Text.rich(
-                              TextSpan(
-                                text: 'New here? ',
-                                style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Signup',
-                                    style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
-                  ),
+                  GestureButton(onTap:  () =>  Navigator.of(context).pushReplacement(MaterialPageRoute(builder : (context) => SignUpScreen())),
+                   msg: 'New here? ', auth: 'Signup'),
+                 
                 ],
               ),
           ),

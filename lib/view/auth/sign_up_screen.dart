@@ -2,6 +2,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:pingolearnapp/components/auth_button.dart';
+import 'package:pingolearnapp/components/gesture_button.dart';
 import 'package:pingolearnapp/controllers/auth/auth_service.dart';
 import 'package:pingolearnapp/global.dart';
 import 'package:pingolearnapp/view/auth/login_screen.dart';
@@ -103,11 +105,9 @@ class SignUpScreen extends StatelessWidget {
                     style: const TextStyle(color: Colors.black),
                   ),
                   SizedBox(height: size.height/4),
-                  ElevatedButton(
-                    onPressed: () async{
 
+                   AuthButton(onPressed: () async{
                       if(_formKey.currentState!.validate()){
-
                         await signUpService.signUp(
                         _nameController.text,
                         _emailController.text,
@@ -115,38 +115,12 @@ class SignUpScreen extends StatelessWidget {
                         context,
                         );                       
                       }
-                        
-                    },
-                    child: Text('Signup'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      foregroundColor: Colors.white,
-                      fixedSize: Size(size.width/2, size.height/15),
-                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                      textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
-                      shape: RoundedRectangleBorder( // Rectangle shape
-                      borderRadius: BorderRadius.circular(10),
-                     ),
-                    ),
-                  ),
-            
+                    }, text: 'Signup', size: size),
+
                   SizedBox(height: size.height/100),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder : (context) => LoginScreen())),
-                    child: Text.rich(
-                              TextSpan(
-                                text: 'Already have an account? ',
-                                style: const TextStyle(color: Colors.black,fontWeight: FontWeight.w600),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Login',
-                                    style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,fontSize: 14),
-                                  ),
-                                  
-                                ],
-                              ),
-                            ),
-                  ),         
+                  
+                  GestureButton(onTap:() => Navigator.of(context).pushReplacement(MaterialPageRoute(builder : (context) => LoginScreen())),
+                   msg: 'Already have an account? ', auth: 'Login'),
                 ],
               ),
           ),
