@@ -34,14 +34,7 @@ class ProductScreen extends StatelessWidget {
             if (productProvider.isLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (productProvider.errorMessage != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Error: ${productProvider.errorMessage}'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            });
+            //  
               return Center(child: Text(productProvider.errorMessage!));
             } else {
               return GridView.builder(
